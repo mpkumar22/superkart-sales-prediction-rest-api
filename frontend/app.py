@@ -58,3 +58,21 @@ if st.button("Predict", type='primary'):
             st.error("❌ API Error: Please verify input values or try again later.")
     except Exception as e:
         st.error(f"⚠️ Connection error: {e}")
+
+# Section for batch prediction
+st.subheader("Batch Prediction")
+
+# Allow users to upload a CSV file for batch prediction
+uploaded_file = st.file_uploader("Upload CSV file for batch prediction", type=["csv"])
+
+# Make batch prediction when the "Predict Batch" button is clicked
+if uploaded_file is not None:
+    if st.button("Predict Batch", type="primary"):
+        response = requests.post(f"{BACKEND_URL}/v1/Predictbatch", files={"file": uploaded_file})  # Send file to Flask API
+        if response.status_code == 200:
+            predictions = response.json()
+            st.success("Batch predictions completed!")
+            st.write(predictions)  # Display the predictions
+        else:
+            st.error("Unable to connect to the prediction API.")
+
