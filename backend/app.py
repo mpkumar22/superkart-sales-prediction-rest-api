@@ -10,7 +10,7 @@ superkart_api = Flask("superkart_sales_api")
 CORS(superkart_api)
 
 # Load the trained model pipeline (preprocessing + model)
-model = joblib.load("/content/drive/My Drive/Model Deployment/Project/backend/superkart_sales_forecast_model_v1_0.joblib")
+model = joblib.load("backend/superkart_sales_forecast_model_v1_0.joblib")
 
 # Health check route
 @superkart_api.get('/')
